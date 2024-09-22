@@ -3,6 +3,7 @@ package com.example.myopenweather.data.repository
 import com.example.myopenweather.data.mappers.toWeather
 import com.example.myopenweather.data.network.WeatherApi
 import com.example.myopenweather.domain.model.Weather
+import com.example.myopenweather.domain.repository.WeatherRepository
 import com.example.myopenweather.domain.utils.Result
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers

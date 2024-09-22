@@ -1,5 +1,5 @@
 # Weather
-[![Kotlin](https://img.shields.io/badge/kotlin-1.8.10-blue.svg?logo=kotlin)](http://kotlinlang.org)
+[![Kotlin](https://img.shields.io/badge/kotlin-1.9.0-blue.svg?logo=kotlin)](http://kotlinlang.org)
 [![Gradle](https://img.shields.io/badge/Gradle-8-green?style=flat)](https://gradle.org)
 <a href="https://github.com/MuhammadHussainKhan"><img alt="License" src="https://img.shields.io/static/v1?label=GitHub&message=MuhammadHussainKhan&color=C51162"/></a><br>
 Weather is an Android app for Weather with Jetpack Compose. It uses [openweathermap API](https://openweathermap.org/api). It is single screen app which displays weather data for a city.

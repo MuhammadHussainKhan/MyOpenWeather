@@ -3,12 +3,15 @@ package com.example.myopenweather.presentation.weather
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.myopenweather.data.repository.WeatherRepository
+import com.example.myopenweather.domain.repository.WeatherRepository
+import com.example.myopenweather.domain.usecase.GetCityNameUseCase
+import com.example.myopenweather.domain.usecase.GetWeatherUseCase
+import com.example.myopenweather.domain.usecase.SaveCityNameUseCase
 import com.example.myopenweather.domain.utils.DEFAULT_WEATHER_DESTINATION
-import com.example.myopenweather.presentation.weather.SearchWidgetState
-import com.example.myopenweather.presentation.weather.WeatherUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import com.example.myopenweather.domain.utils.Result
 
@@ -21,12 +24,25 @@ import javax.inject.Inject
 
 @HiltViewModel
 class WeatherViewModel @Inject constructor(
-    private val repository: WeatherRepository,
+    private val getWeatherUseCase: GetWeatherUseCase,
+    private val saveCityNameUseCase: SaveCityNameUseCase,
+    private val getCityNameUseCase: GetCityNameUseCase
 ) : ViewModel() {
 
     private val _uiState: MutableStateFlow<WeatherUiState> =
         MutableStateFlow(WeatherUiState(isLoading = true))
     val uiState: StateFlow<WeatherUiState> = _uiState.asStateFlow()
+
+    fun saveLastCityName(userName: String) {
+        saveCityNameUseCase.execute(userName)
+    }
+
+    fun loadLastCityName() {
+        _uiState.value =  uiState.value.copy(cityName = getCityNameUseCase.execute()?: DEFAULT_WEATHER_DESTINATION)
+    }
+// var state by mutableStateOf(MerchantUiState())
+
+
 
     private val _searchWidgetState: MutableState<SearchWidgetState> =
         mutableStateOf(value = SearchWidgetState.CLOSED)
@@ -44,11 +60,15 @@ class WeatherViewModel @Inject constructor(
     }
 
     init {
-        getWeather()
+        loadLastCityName()
+        getWeather(uiState.value.cityName)
     }
 
     fun getWeather(city: String = DEFAULT_WEATHER_DESTINATION) {
-        repository.getWeatherForecast(city).map { result ->
+
+        saveLastCityName(city)
+
+        getWeatherUseCase.execute(city).map { result ->
             when (result) {
                 is Result.Success -> {
                     _uiState.value = WeatherUiState(weather = result.data)

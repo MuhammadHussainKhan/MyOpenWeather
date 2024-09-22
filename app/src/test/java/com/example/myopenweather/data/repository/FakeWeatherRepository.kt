@@ -5,6 +5,7 @@ import com.example.myopenweather.domain.model.Condition
 import com.example.myopenweather.domain.model.Forecast
 import com.example.myopenweather.domain.model.Hour
 import com.example.myopenweather.domain.model.Weather
+import com.example.myopenweather.domain.repository.WeatherRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import com.example.myopenweather.domain.utils.Result

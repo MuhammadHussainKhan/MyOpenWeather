@@ -1,4 +1,4 @@
-package com.example.myopenweather.data.repository
+package com.example.myopenweather.domain.repository
 
 
 import com.example.myopenweather.domain.model.Weather

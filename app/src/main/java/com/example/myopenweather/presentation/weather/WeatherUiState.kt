@@ -6,4 +6,5 @@ data class WeatherUiState(
     val weather: Weather? = null,
     val isLoading: Boolean = false,
     val errorMessage: String = "",
+    val cityName: String = "",
 )
