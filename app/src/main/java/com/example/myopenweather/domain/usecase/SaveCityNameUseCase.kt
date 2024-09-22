@@ -6,7 +6,7 @@ import javax.inject.Inject
 class SaveCityNameUseCase @Inject constructor(
     private val preferencesManager: PreferencesManager
 ) {
-    fun execute(userName: String) {
-        preferencesManager.saveUserName(userName)
+    fun execute(cityName: String) {
+        preferencesManager.saveCityName(cityName)
     }
 }

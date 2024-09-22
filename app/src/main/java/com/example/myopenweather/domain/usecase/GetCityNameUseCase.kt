@@ -7,6 +7,6 @@ class GetCityNameUseCase @Inject constructor(
     private val preferencesManager: PreferencesManager
 ) {
     fun execute(): String? {
-        return preferencesManager.getUserName()
+        return preferencesManager.getCityName()
     }
 }
